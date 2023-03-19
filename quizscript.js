@@ -11,3 +11,13 @@ var questions = [ {
 ]
 
 var correctAnswer = 0;
+var startButton = document.queryselector ("start_button")
+
+//display info box
+"startButton".onclick = () =>{
+  "info_box".classList.add("activeInfo");
+}
+
+
+//"startButton".addEventLister ("click", function() { if 
+  

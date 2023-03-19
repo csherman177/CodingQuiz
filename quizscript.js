@@ -1,52 +1,13 @@
-let questions = [
-    {
-    numb: 1,
-    question: "Question 1",
-    answer: "Answer 1",
-    options: [
-      "Hyper Text Preprocessor",
-      "Hyper Text Markup Language",
-      "Hyper Text Multiple Language",
-      "Hyper Tool Multi Language"
-    ]
-  },
+var questions = [ {
+  question: "1. This is going to be question #1.",
+  choices: ["msg(Answer 1)", "msg(Answer 2)", "msg(Answer 3)", "msg(Answer 4)", ]
+  correctAnswer: 3
+}
 
-  let questions = [
-    {
-    numb: 1,
-    question: "What does HTML stand for?",
-    answer: "Hyper Text Markup Language",
-    options: [
-      "Hyper Text Preprocessor",
-      "Hyper Text Markup Language",
-      "Hyper Text Multiple Language",
-      "Hyper Tool Multi Language"
-    ]
-  } ],
+{  question: "2. This is going to be question #2.",
+  choices: ["msg(Answer 1)", "msg(Answer 2)", "msg(Answer 3)", "msg(Answer 4)", ]
+  correctAnswer: 3
+}
+]
 
-  let questions = [
-    {
-    numb: 1,
-    question: "What does HTML stand for?",
-    answer: "Hyper Text Markup Language",
-    options: [
-      "Hyper Text Preprocessor",
-      "Hyper Text Markup Language",
-      "Hyper Text Multiple Language",
-      "Hyper Tool Multi Language"
-    ]
-  } ],
-  
-  let questions = [
-    {
-    numb: 1,
-    question: "What does HTML stand for?",
-    answer: "Hyper Text Markup Language",
-    options: [
-      "Hyper Text Preprocessor",
-      "Hyper Text Markup Language",
-      "Hyper Text Multiple Language",
-      "Hyper Tool Multi Language"
-    ]
-  },
-  ]
+var correctAnswer = 0;

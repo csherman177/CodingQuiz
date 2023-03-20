@@ -4,7 +4,6 @@ body{
 }
 
 .parent_container {
-    display:none;
     flex-direction: row;
 }
 

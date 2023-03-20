@@ -9,23 +9,34 @@
   </head>
 
   <body> 
-    <h1>WEB API QUIZ</h1>
    <!-- Start Button -->
   <div class="parent_container">
+    <h1>WEB API QUIZ</h1>
     <button class="start_button">Click Here to Start!</button>
 
     <!-- Info Box -->
     <!-- Enter rules about quiz here-->
-      <div class="info_box"><span>TITLE</span> 
+      <!-- <div class="info_box"><span>TITLE</span> 
           <div class=info>Rule #1</div> 
           <div class=info>Rule #2</div> 
           <div class=info>Rule #3</div> 
           <div class=info>Rule #4</div>    
-      </div>
-
-      <div class="questions"></div>
+      </div> -->
   </div>
-        
+
+  <div class="questions" style ="display: none">
+    <h1> Please answer the questions field.</h1>
+    <h1 id="questionTitle"></h1>
+    <div id="questionOption"></div>
+      <div id="answer-buttons" class="btn-grid"></div>
+       <button id="Option0" class="btn"></button>
+       <button id="Option1" class="btn"></button>
+       <button id="Option2" class="btn"></button>
+       <button id="Option3" class="btn"></button>
+
+  </div>
+
+  <div class="score"></div>
 
     <!-- <div class="buttons"></div>;
       <button class="quit">Quit</button>;

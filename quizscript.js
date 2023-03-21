@@ -48,7 +48,7 @@ function startQuiz() {
 // Start Questions
 function getQuestions () {
   optionEl.textContent=""
-   titleEl.textContent=questions[questionIndex].questions
+   titleEl.textContent=questions[questionIndex].question
    optionEl.textContent=questions[questionIndex].choices
   
    //var answerOption = questions.options;
@@ -73,7 +73,7 @@ function endQuiz () {
 }
 
 // End Quiz if no more questions
-if (questionIndex < questions.length) {
+if (questionIndex < questions.length -1) {
   getQuestions();
 }
 else { endQuiz ();

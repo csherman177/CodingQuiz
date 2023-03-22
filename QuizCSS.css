@@ -21,3 +21,13 @@ body{
     left: 50%;
     transform: translate(-50%, -50%)
 }
+
+.btn-ctnr {
+    display:flex;
+    flex-direction: column;
+}
+
+.choices {
+    display: flex;
+    
+}

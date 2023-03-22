@@ -13,7 +13,9 @@ var questionIndex = 0;
 var score = 0;
 var scoreEl = document.querySelector (".score")
 var answersEl = [Option1El, Option2El, Option3El, Option4El]
-
+var timeEl=document.getElementById ("Time")
+var mainEl=document.querySelector (".main")
+var choicesEl=document.querySelector (".choices")
 
 var questions = [ 
   {
@@ -35,6 +37,13 @@ var questions = [
 ]
 
 var correctAnswer = 0;
+
+var answerBtn0 = document.querySelector("Option0");
+var answerBtn1 = document.querySelector("Option1");
+var answerBtn2 = document.querySelector("Option2");
+var answerBtn3 = document.querySelector("Option3");
+
+var answers = [answerBtn0, answerBtn1, answerBtn2, answerBtn3 ]
 
 // Functions
 
@@ -63,8 +72,32 @@ function getQuestions () {
 
 // Go to next question
 function getNextQuestion () {
+  // End Quiz if no more questions
+if (questionIndex < questions.length -1) {
   questionIndex++;
-  getQuestions ()
+  getQuestions();
+  }
+else { endQuiz ();
+  }
+}
+
+function correctAnswer(buttonOption) {
+  return buttonOption.textContent === question.correctAnswer;
+}
+
+// Check for Correct Answer
+function checkAnswer(event){
+  var buttonOption = event.target;
+
+  if (correctAnswer(buttonOption)) {score = score + 20}
+  else {
+    if (timer > 10) {
+      timer = timer - 10;
+    } else {
+      timer = 0;
+      endQuiz();
+    }
+  }
 }
 
 // End Quiz Function
@@ -81,6 +114,31 @@ else { endQuiz ();
 
 // Event Listeners
 startButton.addEventListener("click", startQuiz);
+
+// Timer
+
+var secondsLeft = 60;
+
+function setTime() {
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft + " seconds left.";
+
+    if(secondsLeft === 0) {
+      clearInterval(timerInterval)
+    }
+
+  }, 1000);
+}
+
+setTime();
+
+// If answer is incorrect, deduct time off timer
+document.getElementById('incorrect').addEventListener('click', function() {
+  sec -= 5;
+  document.getElementById('timerDisplay').innerHTML='00:'+sec;
+});
+
 
 // Next Question
 // var nextQuestion = document.createElement ("body")

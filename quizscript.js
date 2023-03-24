@@ -1,3 +1,4 @@
+// global variables for elements
 var startButton = document.querySelector (".start_button");
 var parent = document.querySelector (".parent_container");
 var questionEl = document.querySelector (".questions");
@@ -9,13 +10,22 @@ var Option4El = document.getElementById("Option3");
 var answerCheckEl = document.getElementById("answerCheck");
 var titleEl = document.getElementById("questionTitle");
 var optionEl = document.getElementById("questionOption");
+var scoreEl = document.querySelector (".score");
+var timeEl=document.getElementById ("Time");
+var mainEl=document.querySelector (".main");
+var scoreTop=document.querySelector ("#scr-top");
+var buttonEl = document.querySelector ("#btn");
+var ansrBtnEL = document.querySelector ("#answer-buttons")
+
+
+// variables for the state of the code
 var questionIndex = 0;
 var score = 0;
-var scoreEl = document.querySelector (".score")
-var answersEl = [Option1El, Option2El, Option3El, Option4El]
-var timeEl=document.getElementById ("Time")
-var mainEl=document.querySelector (".main")
-var choicesEl=document.querySelector (".choices")
+var secondsLeft = 60;
+var timerInterval;
+// var answersEl = [Option1El, Option2El, Option3El, Option4El];
+// var answers = [answerBtn0, answerBtn1, answerBtn2, answerBtn3 ]
+// var correctAnswer = 0;
 
 var questions = [ 
   {
@@ -35,16 +45,6 @@ var questions = [
   },
   
 ]
-
-var correctAnswer = 0;
-
-var answerBtn0 = document.querySelector("Option0");
-var answerBtn1 = document.querySelector("Option1");
-var answerBtn2 = document.querySelector("Option2");
-var answerBtn3 = document.querySelector("Option3");
-
-var answers = [answerBtn0, answerBtn1, answerBtn2, answerBtn3 ]
-
 // Functions
 
 //Start Quiz
@@ -52,103 +52,68 @@ function startQuiz() {
   parent.style.display="none";
   questionEl.style.display="block";
   getQuestions ()
+  setTime();
 }
 
 // Start Questions
 function getQuestions () {
-  optionEl.textContent=""
-   titleEl.textContent=questions[questionIndex].question
-   optionEl.textContent=questions[questionIndex].choices
-  
-   //var answerOption = questions.options;
+  // this function will need to display the question title, and the choices will need to be added to the appropriate buttons
+  // optionEl.textContent=""
+   titleEl.textContent= questions[questionIndex].question
+  //  optionEl.textContent=questions[questionIndex].choices
+  Option1El.textContent = questions[questionIndex].choices[0]
+  Option2El.textContent = questions[questionIndex].choices[1]
+  Option3El.textContent = questions[questionIndex].choices[2]
+  Option4El.textContent = questions[questionIndex].choices[3]
 
-   for (let index = 0; index < questions[questionIndex].choices.length; index++) {
-    var buttonOption = document.createElement ("button");
-    buttonOption.textContent=questions[questionIndex].choices[index];
-    buttonOption.onclick=getNextQuestion;
-    optionEl.appendChild(buttonOption)
-   }
+  Option1El.setAttribute('value', questions[questionIndex].choices[0])
+  Option2El.setAttribute('value', questions[questionIndex].choices[1])
+  Option3El.setAttribute('value', questions[questionIndex].choices[2])
+  Option4El.setAttribute('value', questions[questionIndex].choices[3])
+
+  Option1El.addEventListener('click', getNextQuestion);
+  Option2El.addEventListener('click', getNextQuestion);
+  Option3El.addEventListener('click', getNextQuestion);
+  Option4El.addEventListener('click', getNextQuestion);
+  
 }
 
 // Go to next question
 function getNextQuestion () {
-  // End Quiz if no more questions
-if (questionIndex < questions.length -1) {
+  console.log(this.value);
+  console.log(questions[questionIndex].correctAnswer);
+
+  if(this.value !== questions[questionIndex].correctAnswer){
+    // deduct 5 seconds
+    secondsLeft-=5
+    timeEl.textContent = secondsLeft + " seconds left.";
+  }
+
   questionIndex++;
-  getQuestions();
-  }
-else { endQuiz ();
-  }
-}
 
-function correctAnswer(buttonOption) {
-  return buttonOption.textContent === question.correctAnswer;
-}
-
-// Check for Correct Answer
-function checkAnswer(event){
-  var buttonOption = event.target;
-
-  if (correctAnswer(buttonOption)) {score = score + 20}
-  else {
-    if (timer > 10) {
-      timer = timer - 10;
-    } else {
-      timer = 0;
-      endQuiz();
-    }
+  if(questionIndex === questions.length || secondsLeft === 0){
+    endQuiz()
+  }else{
+    getQuestions()
   }
+
 }
 
 // End Quiz Function
 function endQuiz () {
- scoreEl.textContent = "You scored" + score + "! Way to go!";
-}
-
-// End Quiz if no more questions
-if (questionIndex < questions.length -1) {
-  getQuestions();
-}
-else { endQuiz ();
+ scoreEl.textContent = "You have finished the quiz!";
+ clearInterval(timerInterval)
 }
 
 // Event Listeners
 startButton.addEventListener("click", startQuiz);
 
 // Timer
-
-var secondsLeft = 60;
-
 function setTime() {
-  var timerInterval = setInterval(function() {
+   timerInterval = setInterval(function() {
     secondsLeft--;
     timeEl.textContent = secondsLeft + " seconds left.";
 
-    if(secondsLeft === 0) {
-      clearInterval(timerInterval)
-    }
 
   }, 1000);
 }
-
-setTime();
-
-// If answer is incorrect, deduct time off timer
-document.getElementById('incorrect').addEventListener('click', function() {
-  sec -= 5;
-  document.getElementById('timerDisplay').innerHTML='00:'+sec;
-});
-
-
-// Next Question
-// var nextQuestion = document.createElement ("body")
-// nextQuestion = counter + 1;
-// if (counter < question.length - 1) {
-//   setCounter(nextQuestion);
-// } else {
-//   setEnd(!is_end);
-//   setStart(!is_started);
-//   setCounter(0);
-// }
-
-  
